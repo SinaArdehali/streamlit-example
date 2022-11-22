@@ -44,7 +44,7 @@ In the meantime, below is an example of what you can do with just a few lines of
 def load_models():
     # french_model = spacy.load("./models/fr/")
     # english_model = spacy.load("./models/en/")
-    english_model = spacy.load("en_core_web_sm")
+    english_model = spacy.load("./models/en/")
     models = {"en": english_model}
     # models = {"en": english_model, "fr": french_model}
     return models
