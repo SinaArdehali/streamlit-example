@@ -42,11 +42,11 @@ In the meantime, below is an example of what you can do with just a few lines of
 
 @st.cache(show_spinner=False, allow_output_mutation=True, suppress_st_warning=True)
 def load_models():
-    # french_model = spacy.load("./models/fr/")
-    # english_model = spacy.load("./models/en/")
+    french_model = spacy.load("./models/fr/")
     english_model = spacy.load("./models/en/")
-    models = {"en": english_model}
-    # models = {"en": english_model, "fr": french_model}
+    # english_model = spacy.load("./models/en/")
+    # models = {"en": english_model}
+    models = {"en": english_model, "fr": french_model}
     return models
 
 
