@@ -17,6 +17,25 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+st.set_page_config(page_title="Document Anonymizer", page_icon="🔒")
+
+st.image(
+    "https://emojipedia-us.s3.amazonaws.com/source/skype/289/locked_1f512.png",
+    width=125,
+)
+
+st.title("Document Anonymizer")
+
+st.write(
+    """
+1. Paste some text
+2. Select the entity types to detect (Person, Organization or Location)
+3. Visualize/anonymize the detected entities
+	    """
+)
+
+st.header("")
+
 
 # with st.echo(code_location='below'):
 #     total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
@@ -84,7 +103,14 @@ selected_entities = st.sidebar.multiselect(
 )
 selected_model = models[selected_language]
 
-text_input = st.text_area("Type a text to anonymize")
+text_input = st.text_area(
+    "Type a text to anonymize",
+    height=400,
+    value="""
+Miles Dewey Davis (May 26, 1926 – September 28, 1991) was an American trumpeter, bandleader, and composer.
+Born in Alton, Illinois, and raised in East St. Louis, Davis left to study at Juilliard in New York City, before dropping out and making his professional debut as a member of saxophonist Charlie Parker's bebop quintet from 1944 to 1948. Shortly after, he recorded the Birth of the Cool sessions for Capitol Records, which were instrumental to the development of cool jazz. In the early 1950s.
+""",
+)
 
 uploaded_file = st.file_uploader("or Upload a file", type=["doc", "docx", "pdf", "txt"])
 if uploaded_file is not None:
@@ -100,5 +126,8 @@ annotated_text(*tokens)
 if anonymize:
     st.markdown("**Anonymized text**")
     st.markdown("---")
+    st.subheader(" Check anonymized text below 👇")
     anonymized_tokens = process_text(doc, selected_entities, anonymize=anonymize)
-    annotated_text(*anonymized_tokens)
+    downloadableText = annotated_text(*anonymized_tokens)
+    # st.download_button(downloadableText, "Download anonymized text", filename="anonymized_text.txt")
+    # st.download_button(label, data, file_name=None, mime=None, key=None, help=None, on_click=None, args=None, kwargs=None)
